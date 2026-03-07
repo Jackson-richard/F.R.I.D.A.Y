@@ -1,6 +1,6 @@
 # F.R.I.D.A.Y – Personal AI Assistant
 
-F.R.I.D.A.Y (Functional Responsive Intelligent Digital Assistant for You) is a desktop AI assistant inspired by the assistants seen in science-fiction.
+F.R.I.D.A.Y (Female Replacement Intelligent Digital Assistant Youth ) is a desktop AI assistant inspired by the assistants seen in science-fiction.
 It combines conversational AI, voice interaction, and system control to create a natural interface between humans and their computers.
 
 The assistant can listen to voice commands, process them using an AI model, and perform tasks such as opening applications, searching information, or controlling the system.
