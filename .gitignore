@@ -72,19 +72,7 @@ Desktop.ini
 $RECYCLE.BIN/
 *.lnk
 
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
 
-# Linux
-*~
-.fuse_hidden*
-.directory
-.Trash-*
 
 .vscode/settings.json
 .vscode/launch.json
