@@ -10,9 +10,13 @@ config.secret.*
 
 # ── FRIDAY Database (contains your personal conversations & facts) ────────────
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
 *.sqlite
 *.sqlite3
 friday_memory.db
+backend/data/
 
 # ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/

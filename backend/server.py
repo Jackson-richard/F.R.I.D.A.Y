@@ -27,11 +27,11 @@ CORS(app)
 
 
 try:
-    from ai_core import FRIDAYBrain
+    from core.brain_v2 import FRIDAYBrainV2
     from system_control import SystemControl
-    brain = FRIDAYBrain()
+    brain = FRIDAYBrainV2()
     system = SystemControl()
-    print("[SERVER] ✅ FRIDAY brain and system control initialized")
+    print("[SERVER] ✅ FRIDAY Neural Core (V2) and system control initialized")
 except Exception as e:
     print(f"[SERVER] ❌ Failed to initialize: {e}")
     sys.exit(1)
@@ -138,13 +138,7 @@ def chat():
     if not user_msg:
         return jsonify({"error": "Empty message"}), 400
 
-    
-    system_result = system.parse_and_execute(user_msg)
-    if system_result:
-        speak_async(system_result)
-        return jsonify({"response": system_result, "source": "system"})
-
-   
+    # No more hardcoded string matching. Everything goes through the V2 Brain (Tool Calling).
     try:
         response = brain.think(user_msg)
         speak_async(response)
