@@ -3,276 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="F.R.I.D.A.Y — Female Replacement Intelligent Digital Assistant Youth. An advanced AI personal assistant interface.">
-    <title>F.R.I.D.A.Y — AI Assistant</title>
+    <title>F.R.I.D.A.Y — Holographic V2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Scanline overlay -->
     <div class="scanline-overlay"></div>
-
-    <!-- Particle canvas -->
+    <div class="radar-sweep"></div>
     <canvas id="particleCanvas"></canvas>
-
-    <!-- HUD Grid overlay -->
-    <div class="hud-grid"></div>
-
-    <!-- Boot Screen -->
     <div id="bootScreen" class="boot-screen">
-        <div class="boot-content">
-            <div class="boot-logo">
-                <div class="hex-container">
-                    <svg viewBox="0 0 200 200" class="hex-svg">
-                        <polygon class="hex-outline" points="100,10 180,55 180,145 100,190 20,145 20,55" />
-                        <polygon class="hex-inner" points="100,30 160,65 160,135 100,170 40,135 40,65" />
-                    </svg>
-                    <span class="hex-text">F</span>
-                </div>
+        <div style="text-align: center; color: var(--cyan);">
+            <div style="margin-bottom: 20px;">
+                <svg viewBox="0 0 200 200" width="120" style="filter: drop-shadow(0 0 15px var(--cyan));">
+                    <polygon fill="none" stroke="var(--cyan)" stroke-width="2" points="100,10 180,55 180,145 100,190 20,145 20,55" />
+                    <text x="100" y="125" font-family="Orbitron" font-size="60" font-weight="900" fill="var(--cyan)" text-anchor="middle">F</text>
+                </svg>
             </div>
-            <h1 class="boot-title">F.R.I.D.A.Y</h1>
-            <p class="boot-subtitle">Female Replacement Intelligent Digital Assistant Youth</p>
-            <div class="boot-progress">
-                <div class="boot-progress-bar" id="bootProgressBar"></div>
-            </div>
-            <div class="boot-status" id="bootStatus">Initializing core systems...</div>
+            <h1 style="font-family: Orbitron; font-size: 32px; letter-spacing: 12px; margin-bottom: 10px;">F.R.I.D.A.Y</h1>
+            <p id="bootStatus" style="font-family: Share Tech Mono; font-size: 14px; color: var(--teal); letter-spacing: 4px; text-transform: uppercase;">Booting systems...</p>
         </div>
     </div>
-
-    <!-- Main Interface -->
-    <div id="mainInterface" class="main-interface hidden">
-        
-        <!-- Top Bar -->
+    <div id="mainInterface" class="main-interface" style="opacity: 0;">
         <header class="top-bar">
-            <div class="top-bar-left">
-                <div class="logo-mark">
-                    <svg viewBox="0 0 40 40" class="logo-hex-small">
-                        <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" />
-                    </svg>
-                    <span>F.R.I.D.A.Y</span>
-                </div>
+            <div class="logo-mark">
+                <svg viewBox="0 0 40 40" class="logo-hex-small">
+                    <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" />
+                </svg>
+                <span>F.R.I.D.A.Y</span>
             </div>
-            <div class="top-bar-center">
-                <div class="clock" id="clock"></div>
-                <div class="date" id="date"></div>
+            <div style="text-align: center;">
+                <div class="clock" id="clock">00:00:00</div>
+                <div class="date" id="date">SYNCING DATE...</div>
             </div>
-            <div class="top-bar-right">
-                <div class="status-pill" id="connectionStatus">
-                    <span class="status-dot"></span>
-                    <span class="status-text">CONNECTING</span>
-                </div>
+            <div class="status-pill" id="connectionStatus">
+                <span style="font-size:18px;" id="statusIcon">⚡</span>
+                <span class="status-text">INITIALIZING</span>
             </div>
         </header>
-
-        <!-- Main Content Grid -->
         <div class="content-grid">
-
-            <!-- Left Panel - System Stats -->
             <aside class="panel left-panel">
-                <div class="panel-header">
-                    <span class="panel-icon">◆</span>
-                    <span>SYSTEM DIAGNOSTICS</span>
-                </div>
-                
+                <div class="panel-header">❖ SYSTEM DIAGNOSTICS ❖</div>
                 <div class="stat-card" id="cpuCard">
-                    <div class="stat-label">CPU UTILIZATION</div>
+                    <div class="stat-label">CPU MATRIX</div>
                     <div class="stat-value" id="cpuValue">—</div>
-                    <div class="stat-bar-track">
-                        <div class="stat-bar" id="cpuBar"></div>
-                    </div>
+                    <div class="stat-bar-track"><div class="stat-bar" id="cpuBar"></div></div>
                 </div>
-
                 <div class="stat-card" id="ramCard">
                     <div class="stat-label">MEMORY ALLOCATION</div>
                     <div class="stat-value" id="ramValue">—</div>
-                    <div class="stat-bar-track">
-                        <div class="stat-bar" id="ramBar"></div>
-                    </div>
+                    <div class="stat-bar-track"><div class="stat-bar" id="ramBar"></div></div>
                 </div>
-
                 <div class="stat-card" id="diskCard">
-                    <div class="stat-label">DISK CAPACITY</div>
+                    <div class="stat-label">STORAGE CAPACITY</div>
                     <div class="stat-value" id="diskValue">—</div>
-                    <div class="stat-bar-track">
-                        <div class="stat-bar" id="diskBar"></div>
-                    </div>
-                </div>
-
-                <div class="panel-header" style="margin-top: 20px;">
-                    <span class="panel-icon">◆</span>
-                    <span>AI CORE STATUS</span>
-                </div>
-                
-                <div class="ai-status-grid">
-                    <div class="ai-stat">
-                        <span class="ai-stat-label">PROVIDER</span>
-                        <span class="ai-stat-value" id="aiProvider">—</span>
-                    </div>
-                    <div class="ai-stat">
-                        <span class="ai-stat-label">MODEL</span>
-                        <span class="ai-stat-value" id="aiModel">—</span>
-                    </div>
-                    <div class="ai-stat">
-                        <span class="ai-stat-label">STATUS</span>
-                        <span class="ai-stat-value online" id="aiStatus">—</span>
-                    </div>
-                    <div class="ai-stat">
-                        <span class="ai-stat-label">VOICE</span>
-                        <span class="ai-stat-value" id="voiceStatus">—</span>
-                    </div>
+                    <div class="stat-bar-track"><div class="stat-bar" id="diskBar"></div></div>
                 </div>
             </aside>
-
-            <!-- Center - Main Chat / Arc Reactor -->
             <main class="center-panel">
-                <!-- Arc Reactor Visual -->
                 <div class="arc-reactor-container" id="arcReactorContainer">
                     <div class="arc-reactor">
+                        <div class="reactor-base"></div>
                         <div class="reactor-ring ring-1"></div>
                         <div class="reactor-ring ring-2"></div>
                         <div class="reactor-ring ring-3"></div>
+                        <div class="audio-ring" id="audioRing"></div>
                         <div class="reactor-core"></div>
-                        <div class="reactor-pulse"></div>
-                        <!-- Orbiting elements -->
-                        <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
-                        <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
-                        <div class="orbit orbit-3"><div class="orbit-dot"></div></div>
                     </div>
-                    <div class="reactor-label">NEURAL CORE ACTIVE</div>
+                    <div class="reactor-label">NEURAL INTERFACE ACTIVE</div>
                 </div>
-
-                <!-- Chat Display -->
-                <div class="chat-container" id="chatContainer">
-                    <div class="chat-messages" id="chatMessages">
-                        <!-- Messages appear here -->
-                    </div>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages"></div>
                 </div>
-
-                <!-- Input Area -->
                 <div class="input-area">
                     <div class="input-wrapper">
-                        <div class="input-glow"></div>
-                        <input 
-                            type="text" 
-                            id="messageInput" 
-                            placeholder="Interface with F.R.I.D.A.Y..." 
-                            autocomplete="off"
-                            spellcheck="false"
-                        >
-                        <button id="sendBtn" class="send-btn" title="Send message">
+                        <input type="text" id="messageInput" placeholder="Awaiting protocol input..." autocomplete="off">
+                        <button id="sendBtn" class="action-circle-btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
                             </svg>
                         </button>
-                        <button id="voiceBtn" class="voice-btn" title="Voice input">
+                        <button id="voiceBtn" class="action-circle-btn voice-btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
                                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                                 <line x1="12" y1="19" x2="12" y2="23"/>
-                                <line x1="8" y1="23" x2="16" y2="23"/>
                             </svg>
                         </button>
                     </div>
                 </div>
             </main>
-
-            <!-- Right Panel - Quick Actions & Info -->
             <aside class="panel right-panel">
-                <div class="panel-header">
-                    <span class="panel-icon">◆</span>
-                    <span>QUICK COMMANDS</span>
-                </div>
-                
+                <div class="panel-header">❖ FAST-ACTION HOLOGUIDE ❖</div>
                 <div class="quick-actions">
-                    <button class="action-btn" data-command="open chrome" id="actionChrome">
+                    <button class="btn-hologram" data-command="open browser">
                         <span class="action-icon">🌐</span>
-                        <span>Browser</span>
+                        <span>INTERNET</span>
                     </button>
-                    <button class="action-btn" data-command="open notepad" id="actionNotepad">
-                        <span class="action-icon">📝</span>
-                        <span>Notepad</span>
+                    <button class="btn-hologram" data-command="open vscode">
+                        <span class="action-icon">💻</span>
+                        <span>CODE BASE</span>
                     </button>
-                    <button class="action-btn" data-command="open vscode" id="actionVscode">
-                        <span class="action-icon">⌨️</span>
-                        <span>VS Code</span>
+                    <button class="btn-hologram" data-command="open file explorer">
+                        <span class="action-icon">📂</span>
+                        <span>FILESYSTEM</span>
                     </button>
-                    <button class="action-btn" data-command="open file explorer" id="actionExplorer">
-                        <span class="action-icon">📁</span>
-                        <span>Explorer</span>
-                    </button>
-                    <button class="action-btn" data-command="take a screenshot" id="actionScreenshot">
+                    <button class="btn-hologram" data-command="take a screenshot">
                         <span class="action-icon">📸</span>
-                        <span>Screenshot</span>
-                    </button>
-                    <button class="action-btn" data-command="system status" id="actionStatus">
-                        <span class="action-icon">📊</span>
-                        <span>Status</span>
-                    </button>
-                    <button class="action-btn" data-command="open youtube" id="actionYoutube">
-                        <span class="action-icon">▶️</span>
-                        <span>YouTube</span>
-                    </button>
-                    <button class="action-btn" data-command="battery status" id="actionBattery">
-                        <span class="action-icon">🔋</span>
-                        <span>Battery</span>
+                        <span>CAPTURE</span>
                     </button>
                 </div>
-
-                <div class="panel-header" style="margin-top: 20px;">
-                    <span class="panel-icon">◆</span>
-                    <span>CONVERSATION LOG</span>
+                <div class="panel-header" style="margin-top: 30px;">❖ TELEMETRY LOG ❖</div>
+                <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 8px; border: 1px dashed var(--border-color); text-align: center;">
+                    <span style="display:block; font-family:var(--font-mono); color:var(--cyan-dim); margin-bottom:10px;">LATENCY (CORE)</span>
+                    <span style="font-family:var(--font-display); font-size:24px; color:var(--electric); text-shadow:0 0 10px var(--cyan);" id="latency">-- ms</span>
                 </div>
-                
-                <div class="conversation-stats">
-                    <div class="conv-stat">
-                        <span class="conv-stat-num" id="msgCount">0</span>
-                        <span class="conv-stat-label">MESSAGES</span>
-                    </div>
-                    <div class="conv-stat">
-                        <span class="conv-stat-num" id="sessionTime">00:00</span>
-                        <span class="conv-stat-label">SESSION</span>
-                    </div>
-                </div>
-
-                <button class="clear-btn" id="clearBtn">
-                    <span>⟲</span> CLEAR MEMORY
+                <button class="btn-hologram" style="margin-top: 16px; width: 100%; border-color: rgba(255, 61, 0, 0.4); color: var(--red-alert);" id="clearBtn">
+                    <span class="action-icon" style="filter: drop-shadow(0 0 5px var(--red-alert));">⟲</span>
+                    <span>FLUSH MEMORY</span>
                 </button>
             </aside>
-
         </div>
-
-        <!-- Bottom Bar -->
-        <footer class="bottom-bar">
-            <div class="bottom-left">
-                <span class="hud-label">SEC PROTOCOL: <span class="text-cyan">ACTIVE</span></span>
-            </div>
-            <div class="bottom-center">
-                <span class="hud-label">F.R.I.D.A.Y v2.0 — NEURAL INTERFACE</span>
-            </div>
-            <div class="bottom-right">
-                <span class="hud-label">MESH: <span class="text-cyan" id="latency">—</span>ms</span>
-            </div>
-        </footer>
     </div>
-
-    <!-- Audio visualizer for voice -->
-    <div id="voiceVisualizer" class="voice-visualizer hidden">
-        <div class="viz-bars">
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-            <div class="viz-bar"></div>
-        </div>
-        <span class="viz-label">LISTENING...</span>
-    </div>
-
+    <audio id="snd-boot" src="data:audio/wav;base64,UklGRmYBAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YUMBAAAfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f"></audio>
     <script src="app.js"></script>
 </body>
 </html>
