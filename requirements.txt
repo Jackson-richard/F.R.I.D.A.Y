@@ -1,27 +1,20 @@
-# FRIDAY Requirements — Windows PC
-# Install: pip install -r requirements.txt
 
-# ── AI PROVIDERS (pick ONE based on your .env config) ──────────────────────────
-groq>=0.8.0                      # Groq API (free tier) — RECOMMENDED
-# google-generativeai>=0.5.0     # Gemini API (free tier) — uncomment if using Gemini
-# requests>=2.31.0               # Ollama (local) — uncomment if using Ollama
+groq>=0.8.0                     
 
-# ── VOICE INPUT ────────────────────────────────────────────────────────────────
-SpeechRecognition>=3.10.0        # Google STT (free, easy fallback)
-pyaudio>=0.2.14                  # Microphone access (required by SpeechRecognition)
-# faster-whisper>=1.0.0          # Offline Whisper STT — uncomment for offline voice
+SpeechRecognition>=3.10.0        
+pyaudio>=0.2.14                  
 
-# ── VOICE OUTPUT ───────────────────────────────────────────────────────────────
-edge-tts>=6.1.9                  # Microsoft Neural TTS (free, no API key)
-pygame>=2.5.0                    # Audio playback for edge-tts
-# pyttsx3>=2.90                  # Fully offline TTS fallback — uncomment if needed
 
-# ── SYSTEM CONTROL ─────────────────────────────────────────────────────────────
-pyautogui>=0.9.54                # Screenshots, mouse/keyboard control
-psutil>=5.9.0                    # CPU, RAM, battery info
-Pillow>=10.0.0                   # Screenshot support for pyautogui
+edge-tts>=6.1.9                 
+pygame>=2.5.0                    
+# pyttsx3>=2.90                 
 
-# ── UTILITIES ──────────────────────────────────────────────────────────────────
-python-dotenv>=1.0.0             # Load .env config file
-requests>=2.31.0                 # HTTP requests
-numpy>=1.24.0                    # Audio processing (for Whisper)
+
+pyautogui>=0.9.54               
+psutil>=5.9.0                    
+Pillow>=10.0.0                   
+
+
+python-dotenv>=1.0.0             
+requests>=2.31.0                
+numpy>=1.24.0                    
