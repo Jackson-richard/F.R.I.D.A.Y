@@ -26,6 +26,7 @@ const dom = {
     diskValue:        document.getElementById("diskValue"),
     diskBar:          document.getElementById("diskBar"),
     latency:          document.getElementById("latency"),
+    matrixLog:        document.getElementById("matrixLog"),
     arcReactor:       document.querySelector(".arc-reactor"),
     audioRing:        document.getElementById("audioRing"),
     particleCanvas:   document.getElementById("particleCanvas"),
@@ -250,6 +251,23 @@ function startParticles() {
     }
     draw();
 }
+
+const hexCodes = ["0x8A", "0xFF", "0x00", "0x1C", "0x4D", "0x9E", "0x77", "0x3B", "SYS", "MEM", "CPU", "NET", "AI_", "CORE", "FRDY", "CMD"];
+const logMessages = ["NEURAL NODE CONNECTED", "MEMORY ALLOCATED", "RE-ROUTING POWER", "SCANNING...", "CONNECTION SECURE", "INDEXING DATA", "CALIBRATING..."];
+function addMatrixLog() {
+    if(!dom.matrixLog) return;
+    const log = document.createElement("div");
+    log.style.opacity = "0.8";
+    const mType = hexCodes[Math.floor(Math.random()*hexCodes.length)];
+    const mText = Math.random() > 0.3 ? `OVERRIDE_${Math.floor(Math.random()*9999)}` : logMessages[Math.floor(Math.random()*logMessages.length)];
+    log.innerHTML = `[${new Date().toISOString().split('T')[1].slice(0,-1)}] <span style="color:var(--gold)">${mType}</span> :: ${mText}`;
+    dom.matrixLog.appendChild(log);
+    if (dom.matrixLog.children.length > 8) {
+        dom.matrixLog.removeChild(dom.matrixLog.firstChild);
+    }
+}
+setInterval(addMatrixLog, 600);
+
 dom.messageInput.addEventListener("keydown", (e) => { if (e.key === "Enter") sendMessage(); });
 dom.sendBtn.addEventListener("click", sendMessage);
 dom.voiceBtn.addEventListener("click", toggleVoice);
