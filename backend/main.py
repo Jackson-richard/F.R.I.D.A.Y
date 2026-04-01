@@ -1,13 +1,3 @@
-"""
-FRIDAY — Female Replacement Intelligent Digital Assistant Youth
-Main Entry Point — Ties everything together
-Author: FRIDAY for Jackson ❤️
-
-Usage:
-    python main.py              → Text mode (safe to test first)
-    python main.py --voice      → Voice mode (requires mic + speakers)
-    python main.py --setup      → Guided setup wizard
-"""
 
 import os
 import sys
