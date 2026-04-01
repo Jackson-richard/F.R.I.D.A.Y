@@ -51,7 +51,6 @@ class MemoryCore:
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            # Fetch latest rows, then reverse to chronological order for the LLM
             cursor.execute("""
                 SELECT role, content, tool_calls, tool_call_id
                 FROM conversations
@@ -83,7 +82,6 @@ class MemoryCore:
             cursor.execute("DELETE FROM conversations WHERE session_id = ?", (session_id,))
             conn.commit()
 
-# Simple testing
 if __name__ == "__main__":
     mem = MemoryCore()
     mem.add_message("default", "system", "You are F.R.I.D.A.Y")
