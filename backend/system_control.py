@@ -45,7 +45,6 @@ class SystemControl:
         return None
 
     def open_url_in_browser(self, url: str, browser: str = "default") -> str:
-        """Open a URL in a specific browser or default browser."""
         if not url.startswith(("http://", "https://")):
             url = "https://" + url
 
