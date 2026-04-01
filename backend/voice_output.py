@@ -1,8 +1,3 @@
-"""
-FRIDAY Voice Output — Text-to-Speech
-Uses edge-tts (Microsoft Neural voices — FREE, no API key)
-Fallback: pyttsx3 (fully offline)
-"""
 
 import os
 import asyncio
@@ -48,7 +43,6 @@ class VoiceOutput:
                 self._engine = pyttsx3.init()
                 self._engine.setProperty("rate", 175)
                 self._engine.setProperty("volume", 1.0)
-                # Try to set a male voice
                 voices = self._engine.getProperty("voices")
                 for v in voices:
                     if "david" in v.name.lower() or "male" in v.name.lower():
@@ -59,11 +53,7 @@ class VoiceOutput:
                 raise ImportError("Run: pip install pyttsx3")
 
     def speak(self, text: str, block: bool = True):
-        """
-        Convert text to speech and play it.
-        block=True  → wait until done speaking
-        block=False → speak in background thread
-        """
+        
         if not text or not text.strip():
             return
 
@@ -95,7 +85,6 @@ class VoiceOutput:
                 self._speaking = False
 
     async def _speak_edge(self, text: str):
-        """Use Microsoft edge-tts (free, high quality neural voice)."""
         import edge_tts
         import pygame
 
@@ -115,7 +104,7 @@ class VoiceOutput:
         os.unlink(tmp_path)
 
     def _play_audio(self, filepath: str):
-        """Play audio file using pygame (cross-platform)."""
+        
         try:
             import pygame
             pygame.mixer.init()
@@ -134,7 +123,7 @@ class VoiceOutput:
             )
 
     def _speak_pyttsx3(self, text: str):
-        """Fully offline fallback TTS."""
+      
         import pyttsx3
         engine = pyttsx3.init()
         engine.setProperty("rate", 175)
@@ -144,7 +133,7 @@ class VoiceOutput:
         engine.stop()
 
     def _clean_text(self, text: str) -> str:
-        """Remove markdown formatting from text before speaking."""
+      
         import re
         text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)   
         text = re.sub(r'\*(.+?)\*', r'\1', text)         
@@ -159,7 +148,7 @@ class VoiceOutput:
         return self._speaking
 
     def set_voice(self, voice_key: str):
-        """Change voice. Options: friday, friday, us_male, us_female"""
+      
         if voice_key in VOICE_OPTIONS:
             self.voice = VOICE_OPTIONS[voice_key]
             print(f"[SPEECH] Voice changed to: {self.voice}")
