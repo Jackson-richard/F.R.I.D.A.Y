@@ -69,7 +69,6 @@ class FRIDAYBrainV2:
         
        
         if tool_calls:
-            # Save assistant's intent to call a tool
             self.memory.add_message(
                 self.session_id, 
                 "assistant", 
