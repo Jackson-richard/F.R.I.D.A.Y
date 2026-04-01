@@ -1,7 +1,3 @@
-"""
-FRIDAY System Control — Windows PC Control
-Controls: apps, browser, files, volume, screenshots, processes
-"""
 
 import os
 import subprocess
