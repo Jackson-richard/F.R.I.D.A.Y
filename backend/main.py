@@ -224,7 +224,6 @@ class FRIDAY:
         print("\n[FRIDAY] Voice mode offline.")
 
 
-# ── ENTRY POINT ─────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     load_env()
 
