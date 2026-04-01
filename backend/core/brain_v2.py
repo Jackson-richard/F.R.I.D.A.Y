@@ -39,13 +39,13 @@ class FRIDAYBrainV2:
 
     def think(self, user_input: str) -> str:
         """Process user input with memory retrieval and tool calling."""
-        # 1. Save user msg
+        
         self.memory.add_message(self.session_id, "user", content=user_input)
         
-        # 2. Get recent history
+       
         history = self.memory.get_recent_history(self.session_id, limit=6)
         
-        # 3. Build prompt
+       
         messages = [{"role": "system", "content": self._get_system_prompt()}]
         messages.extend(history)
         
