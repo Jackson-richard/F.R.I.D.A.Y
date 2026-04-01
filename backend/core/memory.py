@@ -15,7 +15,6 @@ class MemoryCore:
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             
-            # Create conversations table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS conversations (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
