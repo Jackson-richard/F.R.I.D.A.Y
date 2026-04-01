@@ -15,8 +15,6 @@ class FRIDAYBrainV2:
     def __init__(self):
         self.provider = AI_PROVIDER
         self.memory = MemoryCore()
-        
-        # Load available tools (skills)
         self.tools = [skill.to_tool_schema() for skill in AVAILABLE_SKILLS]
         self.skills_map = {skill.name: skill for skill in AVAILABLE_SKILLS}
         
