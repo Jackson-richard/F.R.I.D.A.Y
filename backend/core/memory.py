@@ -26,7 +26,7 @@ class MemoryCore:
                 )
             """)
             
-            # Create system preferences table
+           
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS system_prefs (
                     key TEXT PRIMARY KEY,
