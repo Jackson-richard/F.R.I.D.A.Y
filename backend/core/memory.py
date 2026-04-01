@@ -10,7 +10,6 @@ class MemoryCore:
         self._ensure_db()
         
     def _ensure_db(self):
-        """Create the necessary directories and tables for persistent database."""
         os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
