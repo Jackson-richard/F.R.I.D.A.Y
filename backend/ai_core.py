@@ -1,8 +1,3 @@
-"""
-FRIDAY AI Core - The Brain
-Supports: Groq (free), Gemini (free), Ollama (local/free)
-Author: FRIDAY for Jackson
-"""
 
 import os
 import json
