@@ -27,7 +27,7 @@ class FRIDAYBrainV2:
             if not GROQ_API_KEY:
                 raise ValueError("GROQ_API_KEY required for tool calling in V2")
             self._client = Groq(api_key=GROQ_API_KEY)
-            self._model = "llama-3.3-70b-versatile" # Latest model supports tools great
+            self._model = "llama-3.3-70b-versatile" 
             print(f"[FRIDAY V2] Client ready. Model: {self._model}")
         else:
             print("[FRIDAY V2] WARNING: V2 currently optimized for Groq tool calling. Falling back to simple mode.")
