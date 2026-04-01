@@ -55,7 +55,7 @@ class FRIDAYBrainV2:
         return "I am offline or functioning without groq API keys, Boss."
 
     def _think_groq(self, messages: List[Dict]) -> str:
-        # Initial AI Call
+        
         response = self._client.chat.completions.create(
             model=self._model,
             messages=messages,
@@ -67,7 +67,7 @@ class FRIDAYBrainV2:
         response_msg = response.choices[0].message
         tool_calls = response_msg.tool_calls
         
-        # Did the LLM decide to call a tool?
+       
         if tool_calls:
             # Save assistant's intent to call a tool
             self.memory.add_message(
@@ -77,21 +77,21 @@ class FRIDAYBrainV2:
             )
             messages.append(response_msg)
             
-            # Execute the requested tools
+          
             for tool_call in tool_calls:
                 func_name = tool_call.function.name
                 func_args = json.loads(tool_call.function.arguments)
                 
                 print(f"[EXECUTING SKILL] {func_name} with args: {func_args}")
                 
-                # Run the actual skill
+              
                 try:
                     skill = self.skills_map[func_name]
                     result = skill.execute(**func_args)
                 except Exception as e:
                     result = f"Error executing tool: {e}"
                 
-                # Save the tool output
+               
                 messages.append({
                     "tool_call_id": tool_call.id,
                     "role": "tool",
@@ -105,7 +105,7 @@ class FRIDAYBrainV2:
                     tool_call_id=tool_call.id
                 )
                 
-            # Send the tool output back to the LLM to formulate a final human response
+            
             second_response = self._client.chat.completions.create(
                 model=self._model,
                 messages=messages
@@ -115,7 +115,6 @@ class FRIDAYBrainV2:
             return final_text
             
         else:
-            # Just normal text response
             text = response_msg.content.strip()
             self.memory.add_message(self.session_id, "assistant", content=text)
             return text
