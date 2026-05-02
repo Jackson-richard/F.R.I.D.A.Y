@@ -1,8 +1,3 @@
-"""
-FRIDAY Voice Input — Speech-to-Text
-Uses faster-whisper (offline, free, fast)
-Fallback: SpeechRecognition (Google free tier)
-"""
 
 import os
 import queue
