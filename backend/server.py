@@ -1,6 +1,3 @@
-"""
-FRIDAY Flask API Server — with fast streaming voice
-"""
 
 import os
 import sys
