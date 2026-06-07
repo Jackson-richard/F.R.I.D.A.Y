@@ -116,7 +116,6 @@ class GetTimeSkill(BaseSkill):
 from skills.weather_skill import WeatherSkill
 from skills.fetch_skill import FetchWebSkill
 
-# Export them so brain.py can dynamically load them
 AVAILABLE_SKILLS = [
     BatteryStatusSkill(),
     SystemInfoSkill(),
