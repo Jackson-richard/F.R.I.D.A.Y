@@ -27,7 +27,6 @@ class FetchWebSkill(BaseSkill):
             soup = BeautifulSoup(res.text, 'html.parser')
             for script in soup(["script", "style"]):
                 script.extract()
-            # extract text
             text = soup.get_text(separator=' ', strip=True)
            
             capped_text = text[:8000]
