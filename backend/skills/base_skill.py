@@ -10,7 +10,6 @@ class BaseSkill:
     name: str = "base_skill"
     description: str = "A generic skill"
     
-    # JSON Schema for the tool arguments, compatible with OpenAI/Groq/Gemini tool calling
     parameters: Dict[str, Any] = {
         "type": "object",
         "properties": {},
