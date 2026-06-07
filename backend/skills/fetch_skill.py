@@ -30,7 +30,7 @@ class FetchWebSkill(BaseSkill):
                 script.extract()
             # extract text
             text = soup.get_text(separator=' ', strip=True)
-            # truncate text to avoid blowing up context window
+           
             capped_text = text[:8000]
             if len(text) > 8000:
                 capped_text += "... [Content truncated]"
