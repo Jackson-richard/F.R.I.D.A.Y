@@ -18,7 +18,6 @@ class WeatherSkill(BaseSkill):
 
     def execute(self, location: str, **kwargs) -> str:
         try:
-            # wttr.in format 3 gives a nice short text summary
             res = requests.get(f"https://wttr.in/{location}?format=%l:+%C,+%t.+Wind:+%w,+Humidity:+%h", timeout=5)
             if res.status_code == 200:
                 return f"Weather data: {res.text.strip()}"
