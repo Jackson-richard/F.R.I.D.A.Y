@@ -25,7 +25,6 @@ class FetchWebSkill(BaseSkill):
             res.raise_for_status()
             
             soup = BeautifulSoup(res.text, 'html.parser')
-            # remove scripts and styles
             for script in soup(["script", "style"]):
                 script.extract()
             # extract text
